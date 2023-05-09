@@ -4,7 +4,7 @@
 
 -   Occupation: Associate Professor
 
--   Location: Lahore, Pakistan
+-   Location: Shinjuku City, Tokyo
 
 -   Interests: Movies, Teaching
 
