@@ -12,25 +12,17 @@ their carbon footprint based on industry-standard emissions data.
 
 The app will include the following features:
 
--   **Sign up/Login:** Users can create a new account or log in using
-    > their existing credentials.
+-   **Sign up/Login:** Users can create a new account or log in using their existing credentials.
 
--   **Carbon Emissions Tracker:** Users can track their daily carbon
-    > emissions in real-time and view their progress over time.
+-   **Carbon Emissions Tracker:** Users can track their daily carbon emissions in real-time and view their progress over time.
 
--   **Action Logging:** Users can log their actions to reduce carbon
-    > emissions, such as walking or biking instead of driving or using
-    > energy-efficient appliances.
+-   **Action Logging:** Users can log their actions to reduce carbon emissions, such as walking or biking instead of driving or using energy-efficient appliances.
 
--   **Personal Dashboard:** Users can view their carbon emissions
-    > reduction goals, achievements, and awards on a personalized
-    > dashboard.
+-   **Personal Dashboard:** Users can view their carbon emissions reduction goals, achievements, and awards on a personalized dashboard.
 
--   **Social Sharing:** Users can share their achievements with friends
-    > and family on social media platforms.
+-   **Social Sharing:** Users can share their achievements with friends and family on social media platforms.
 
--   **News Feed:** The app will feature a news feed with environmental
-    > news and events.
+-   **News Feed:** The app will feature a news feed with environmental news and events.
 
 **Design**
 
