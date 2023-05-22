@@ -9,7 +9,7 @@ create Table Goal(goal_id int PRIMARY KEY ,user_id int,FOREIGN KEY (user_id) REF
 create Table Achievement(achievement_id int PRIMARY KEY ,user_id int,FOREIGN KEY (user_id) REFERENCES User(user_id),achievement_type Varchar(50),achievement_description Varchar(255) ,date_achieved text);
 
 
-create Table News(news_id int PRIMARY KEY ,title Varchar(50),content Varchar(255),date_publised text);
+create Table News(news_id int PRIMARY KEY ,title Varchar(50),content Varchar(255),date_published text);
 
 create Table SavedNews(user_id int,news_id int, Primary Key(user_id,news_id),FOREIGN KEY (user_id) REFERENCES User(user_id),FOREIGN KEY (news_id) REFERENCES News(news_id));
 
