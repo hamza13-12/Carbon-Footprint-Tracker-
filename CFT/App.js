@@ -15,6 +15,10 @@ export default function App() {
     // Perform login logic here
   };
 
+  const handleSignUp = () => {
+    // Perform sign up operation here
+  }
+
   return (
     <View style={styles.container}>
       <StatusBar style="light" backgroundColor='white' />
@@ -31,6 +35,9 @@ export default function App() {
             <TextInput style={styles.input} placeholder='password' placeholderTextColor='#888' secureTextEntry/>
             <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
                 <Text style={styles.loginButtonText}>Login</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handleSignUp}> 
+              <Text style={styles.signupButtonText}>Sign Up!</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -96,4 +103,12 @@ const styles = StyleSheet.create({
     fontWeight: 'light',
     color: '#fff',
   },
+  signupButtonText: {
+    fontSize: 16,
+    fontWeight: 'light',
+    color: '#fff',
+    width: 63,
+    height: 19,
+    marginTop: 15,
+  }
 });
