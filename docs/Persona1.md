@@ -8,11 +8,9 @@
 
 -   Interests: Gaming, Cycling, Travel
 
--   Goals: Reduce his carbon footprint while maintaining his lifestyle,
-    > and learn more about environmentally sustainable options
+-   Goals: Reduce his carbon footprint while maintaining his lifestyle, and learn more about environmentally sustainable options
 
--   Challenges: Limited knowledge about carbon emissions, and has
-    > difficulty in finding sustainable options while traveling
+-   Challenges: Limited knowledge about carbon emissions, and has difficulty in finding sustainable options while traveling
 
 Fyodor is a freelance content writer and undergraduate student who runs
 a software house that has more than 50 employees, all working remotely.
