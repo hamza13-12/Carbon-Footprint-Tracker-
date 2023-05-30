@@ -11,6 +11,10 @@ export default function App() {
     Keyboard.dismiss();
   };
 
+  const handleLogin = () => {
+    // Perform login logic here
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar style="light" backgroundColor='white' />
@@ -25,6 +29,9 @@ export default function App() {
             <TextInput style={styles.input} placeholder='username' placeholderTextColor='#888' />
             <Text style={{ fontSize: 20 , color: '#fff', marginTop: 20}}>Password</Text>
             <TextInput style={styles.input} placeholder='password' placeholderTextColor='#888' secureTextEntry/>
+            <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
+                <Text style={styles.loginButtonText}>Login</Text>
+            </TouchableOpacity>
           </View>
         </View>
         </TouchableOpacity>
@@ -74,5 +81,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderColor: '#888',
     borderWidth: 1,
-  }
+  },
+  loginButton: {
+    width: 150,
+    height: 40,
+    borderRadius: 20,
+    marginTop: 20,
+    backgroundColor: '#3D5900',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loginButtonText: {
+    fontSize: 16,
+    fontWeight: 'light',
+    color: '#fff',
+  },
 });
