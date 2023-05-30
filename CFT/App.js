@@ -13,6 +13,10 @@ export default function App() {
       <ImageBackground source={require("./assets/bg.png")} style={styles.backgroundImage}>
         <View style={styles.cardContainer}>
           <Image source={require("./assets/Card.png")} style={[styles.cardImage, { width: cardWidth, height: cardHeight }]} />
+          <View style={styles.cardContent}>
+            <Text style={styles.cardText}>Welcome to </Text>
+            <Text style={styles.cardText}>Carbon Footprint Tracker </Text>
+          </View>
         </View>
       </ImageBackground>
     </View>
@@ -37,5 +41,18 @@ const styles = StyleSheet.create({
   },
   cardImage: {
     borderRadius: 20,
+  },
+  cardContent: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    alignItems: 'center',
+    paddingTop: 20,
+  },
+  cardText: {
+    fontSize: 25,
+    color: '#fff',
+    marginBottom: 10,
   }
 });
