@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet,TouchableOpacity } from 'react-native';
+
 
 const AccountCreationScreen = () => {
   const [name, setname] = useState('');
@@ -52,40 +53,77 @@ const AccountCreationScreen = () => {
         secureTextEntry
       />
 
-      <Button title="Sign Up" onPress={handleCreateAccount}color="white"/>
-
+      <TouchableOpacity style={styles.button} onPress={handleCreateAccount}> 
+  
+        <Text style={styles.signup}>Sign Up</Text>
+      </TouchableOpacity>   
+      <Button title='Login' color='white'fontSize='10' opacity='0.5'></Button>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // width:344,
+    height:500,
+    marginTop:100,
+    marginLeft:24,
+    marginBottom:188,
+    marginRight:32,
+    backgroundColor:'rgba(4,118,70,0.24)',
+    opacity:1,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
     color:'white',
+    borderRadius:50
   },
   heading: {
-    fontSize: 24,
+    fontSize: 25,
+    // fontstyle: 'bold',
     fontWeight: 'bold',
-    marginBottom: 24,
+    marginTop:0,
+    marginBottom:10,
     color: 'white'
   },
   input: {
+    borderRadius: 50,
     width: '100%',
     height: 40,
-    borderColor: 'green',
-    borderWidth: 1,
-    marginBottom: 16,
+    backgroundColor:'rgba(163,241,162,0.28)',
+    borderWidth: 0,
+    marginBottom: 8,
     padding: 8,
   },
   inputs:{
+    marginTop:10,
     fontSize:15,
-
     alignItems: 'center',
-    padding: 16,
+    padding: 6,
     color:'white'
+  },
+  button:{
+    
+    backgroundColor: 'rgba(51, 74, 0, 0.51)',
+    borderRadius:20,
+    height:30,
+    width:130,
+    textAlign:'center',
+    justifyContent:'center'
+
+    
+
+
+
+  },
+  signup:{
+    fontSize:20,
+    color:'white',
+    textAlign:'center',
+    opacity:0.75
+
+
+
   }
 
   
