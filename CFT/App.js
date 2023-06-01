@@ -3,10 +3,12 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ImageBackground, Image, Dimensions, TextInput, TouchableOpacity, Keyboard, Button } from 'react-native';
 import Login from './Login';
 import Home from './Home';
+import AccountCreationScreen from './Signupscreen';
 
 export default function App() {
   return (
     // <Login />
+    <AccountCreationScreen/>
     <Home /> 
   );
 }
