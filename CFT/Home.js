@@ -24,6 +24,10 @@ export default function App() {
     //Implement connect card logic here
   };
 
+  const start_track = () => {
+    //Implement connect card logic here
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar style="light" backgroundColor='white' />
@@ -68,6 +72,10 @@ export default function App() {
               <Text style={styles.cardDescription}> environment. </Text>
             </View>
           </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.trackButton} onPress={start_track} activeOpacity={0.7}>
+          <Text style={styles.cardDescription}>Start Tracking</Text>
         </TouchableOpacity>
 
       </ImageBackground>
@@ -129,5 +137,14 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'light',
     color: '#fff',
-  }
+  },
+  trackButton: {
+    width: 146,
+    height: 44,
+    borderRadius: 20,
+    backgroundColor: '#3D5900',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center'
+  },
 });
