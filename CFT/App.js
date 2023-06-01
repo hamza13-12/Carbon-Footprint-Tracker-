@@ -1,49 +1,13 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ImageBackground, Image, Dimensions, TextInput, TouchableOpacity, Keyboard, Button } from 'react-native';
+import Login from './Login';
+import Home from './Home';
 
 export default function App() {
-  const { width, height } = Dimensions.get('window');
-  const cardWidth = Math.min(width, height) * 0.7;
-  const cardHeight = cardWidth * 1.4;
-
-  const dismissKeyboard = () => {
-    Keyboard.dismiss();
-  };
-
-  const handleLogin = () => {
-    // Perform login logic here
-  };
-
-  const handleSignUp = () => {
-    // Perform sign up operation here
-  }
-
   return (
-    <View style={styles.container}>
-      <StatusBar style="light" backgroundColor='white' />
-      <ImageBackground source={require("./assets/bg.png")} style={styles.backgroundImage}>
-      <TouchableOpacity style={styles.touchable} onPress={dismissKeyboard} activeOpacity={1}>
-        <View style={styles.cardContainer}>
-          <Image source={require("./assets/Card.png")} style={[styles.cardImage, { width: cardWidth, height: cardHeight }]} />
-          <View style={styles.cardContent}>
-            <Text style={styles.cardText}>Welcome to </Text>
-            <Text style={styles.cardText}>Carbon Footprint Tracker </Text>
-            <Text style={{ fontSize: 20 , color: '#fff', marginTop: 20}}>Username</Text>
-            <TextInput style={styles.input} placeholder='username' placeholderTextColor='#888' />
-            <Text style={{ fontSize: 20 , color: '#fff', marginTop: 20}}>Password</Text>
-            <TextInput style={styles.input} placeholder='password' placeholderTextColor='#888' secureTextEntry/>
-            <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-                <Text style={styles.loginButtonText}>Login</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleSignUp}> 
-              <Text style={styles.signupButtonText}>Sign Up!</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        </TouchableOpacity>
-      </ImageBackground>
-    </View>
+    // <Login />
+    <Home /> 
   );
 }
 
