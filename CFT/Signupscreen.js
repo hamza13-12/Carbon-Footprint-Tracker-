@@ -120,9 +120,6 @@ const styles = StyleSheet.create({
     color:'white',
     textAlign:'center',
     opacity:0.75
-
-
-
   },
    backgroundImage: {
     flex: 1,
