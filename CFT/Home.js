@@ -39,7 +39,7 @@ export default function App() {
           <Text style={styles.backButtonText}>&lt; Home</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={track} activeOpacity={0.7}>
-          <View style={styles.cardContainer}>
+          <View style={[styles.cardContainer, { marginTop: 40 }]} >
             <Image source={require("./assets/Card.png")} style={[styles.cardImage, { width: cardWidth, height: cardHeight }]} />
             <View style={styles.cardContent}>
               <Text style={styles.cardText}> Track Your Carbon Footprint </Text>
@@ -76,12 +76,10 @@ export default function App() {
             </View>
           </View>
         </TouchableOpacity>
-
+        
         <TouchableOpacity style={styles.trackButton} onPress={start_track} activeOpacity={0.7}>
           <Text style={styles.cardDescription}>Start Tracking</Text>
         </TouchableOpacity>
-
-
       </ImageBackground>
     </View>
 
@@ -125,8 +123,8 @@ const styles = StyleSheet.create({
   },
   backButton: {
     position: 'absolute',
-    top: 28,
-    left: 15
+    left: 15,
+    top: 30,
   },
   backButtonText: {
     fontSize: 16,
