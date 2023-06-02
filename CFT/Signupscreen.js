@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet,TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet,TouchableOpacity,ImageBackground } from 'react-native';
 
 
 const AccountCreationScreen = () => {
@@ -16,6 +16,8 @@ const AccountCreationScreen = () => {
   };
 
   return (
+    <View style={styles.backgroundImage}>
+      <ImageBackground source={require("./assets/bg.png")} style={styles.backgroundImage}>
     <View style={styles.container}>
       <Text style={styles.heading}>Create An Account</Text>
       <Text style={styles.inputs}>Name </Text>
@@ -58,6 +60,8 @@ const AccountCreationScreen = () => {
         <Text style={styles.signup}>Sign Up</Text>
       </TouchableOpacity>   
       <Button title='Login' color='white'fontSize='10' opacity='0.5'></Button>
+     </View>
+    </ImageBackground> 
     </View>
   );
 };
@@ -110,11 +114,6 @@ const styles = StyleSheet.create({
     width:130,
     textAlign:'center',
     justifyContent:'center'
-
-    
-
-
-
   },
   signup:{
     fontSize:20,
@@ -124,6 +123,12 @@ const styles = StyleSheet.create({
 
 
 
+  }
+   backgroundImage: {
+    flex: 1,
+    width: 400,
+    height: 938,
+    justifyContent: 'center',
   }
 
   
