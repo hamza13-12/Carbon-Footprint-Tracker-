@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Button, StyleSheet,TouchableOpacity,ImageBackground } from 'react-native';
 // import { Ionicons } from '@expo/vector-icons';
+
 const DashboardScreen = () => {
     const Trackcarbon = () => {
       };
@@ -64,8 +65,8 @@ const DashboardScreen = () => {
             },
             backgroundImage: {
               flex: 1,
-              width: 400,
-              height: 938,
+              width: '100%',
+              height: '100%',
               justifyContent: 'center',
             },
             container2:{
