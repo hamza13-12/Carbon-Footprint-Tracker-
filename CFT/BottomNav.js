@@ -5,6 +5,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import Home from './Home';
 import { Image } from 'react-native';
+import DashboardScreen from './Dashboard'
+
 
 const Tab = createBottomTabNavigator();
 
@@ -21,7 +23,7 @@ const BottomNav = () => {
             <Tab.Navigator
                 screenOptions={({ route }) => ({
                     headerShown: false,
-                    tabBarStyle: { backgroundColor: '#042927', paddingBottom: 4, paddingVertical: 10 },
+                    tabBarStyle: { backgroundColor: 'rgba(4, 41, 39, 1)', paddingBottom: 4, paddingVertical: 10, borderTopWidth: 2, height: 55 },
                     tabBarLabelStyle: {color: '#ffffff', marginTop: 8, fontSize: 10, fontWeight: 'light'},
                     tabBarIcon: ({ focused, color, size }) => {
                         let iconName = '';
@@ -48,7 +50,7 @@ const BottomNav = () => {
                 })}
             >
                 <Tab.Screen name="Home" component={Home} />
-                <Tab.Screen name="Dashboard" component={Screen2} />
+                <Tab.Screen name="Dashboard" component={DashboardScreen} />
                 <Tab.Screen name="Add data" component={Screen3} />
                 <Tab.Screen name="Profile" component={Screen4} />
             </Tab.Navigator>

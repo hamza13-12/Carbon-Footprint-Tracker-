@@ -5,7 +5,7 @@ const DashboardScreen = () => {
     const Trackcarbon = () => {
       };
     return (<View style={styles.backgroundImage}>
-        <ImageBackground source={require("../assets/bg.png")} style={styles.backgroundImage}>
+        <ImageBackground source={require("./assets/bg.png")} style={styles.backgroundImage}>
         <View style={styles.container}>
             <Text style={styles.heading}>Carbon FootPrint Tracker</Text>
         <Text style={styles.content}>Track your daily carbon emissions and take action to reduce your impact on the environment. Log your daily activities such as transportation, energy use, and food consumption, and calculate your carbon footprint based on industry-standard emissions.</Text> 
