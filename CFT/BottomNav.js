@@ -6,7 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 import Home from './Home';
 import { Image } from 'react-native';
 import DashboardScreen from './Dashboard'
-
+import TrackcarbonScreen from './TrackcarbonScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -55,18 +55,6 @@ const BottomNav = () => {
                 <Tab.Screen name="Profile" component={Screen4} />
             </Tab.Navigator>
         </NavigationContainer>
-    );
-};
-
-const Screen1 = () => {
-    return (
-        <></>
-    );
-};
-
-const Screen2 = () => {
-    return (
-        <></>
     );
 };
 
