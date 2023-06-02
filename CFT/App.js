@@ -3,11 +3,13 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ImageBackground, Image, Dimensions, TextInput, TouchableOpacity, Keyboard, Button } from 'react-native';
 import Login from './Login';
 import Home from './Home';
+import AccountCreationScreen from './Signupscreen'
+import BottomNav from './BottomNav';
+import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
   return (
-    // <Login />
-    <Home /> 
+    <BottomNav />
   );
 }
 
