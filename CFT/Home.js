@@ -1,9 +1,11 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ImageBackground, Image, Dimensions, TouchableOpacity } from 'react-native';
-
+import BottomNav from './BottomNav';
+import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
+
   const { width, height } = Dimensions.get('window');
   const cardWidth = Math.min(width, height) * 0.8;
   const cardHeight = cardWidth * 0.5;
@@ -27,6 +29,7 @@ export default function App() {
   const start_track = () => {
     //Implement connect card logic here
   };
+
 
   return (
     <View style={styles.container}>
@@ -78,8 +81,11 @@ export default function App() {
           <Text style={styles.cardDescription}>Start Tracking</Text>
         </TouchableOpacity>
 
+
       </ImageBackground>
     </View>
+
+
   );
 }
 
