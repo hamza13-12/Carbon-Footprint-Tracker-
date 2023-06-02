@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
 
 
 
-  }
+  },
    backgroundImage: {
     flex: 1,
     width: 400,
