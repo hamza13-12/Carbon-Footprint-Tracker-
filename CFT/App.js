@@ -7,10 +7,11 @@ import AccountCreationScreen from './Signupscreen'
 import BottomNav from './BottomNav';
 import { NavigationContainer } from '@react-navigation/native';
 import ManagementScreen from './ManagementScreen'
+import NewsFeed from './NewsFeed';
 
 export default function App() {
   return (
-    <ManagementScreen />
+    <NewsFeed />
   );
 }
 
