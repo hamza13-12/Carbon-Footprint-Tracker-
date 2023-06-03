@@ -6,7 +6,6 @@ import axios from 'axios';
 const NewsFeed = () => {
     // Define a state variable called "articles" and initialize it to an empty array
     const [articles, setArticles] = useState([]);
-    
 
     // Use the useEffect hook to fetch articles when the component mounts
     useEffect(() => {

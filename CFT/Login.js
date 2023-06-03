@@ -2,11 +2,14 @@ import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ImageBackground, Image, Dimensions, TextInput, TouchableOpacity, Keyboard, Button } from 'react-native';
 import Home from './Home';
+import { useNavigation } from '@react-navigation/native';
 
 export default function App() {
   const { width, height } = Dimensions.get('window');
   const cardWidth = Math.min(width, height) * 0.7;
   const cardHeight = cardWidth * 1.4;
+
+  const navigation = useNavigation();
 
   const dismissKeyboard = () => {
     Keyboard.dismiss();
@@ -15,9 +18,9 @@ export default function App() {
   const handleLogin = () => {
     // Perform login logic here
   };
-
+  
   const handleSignUp = () => {
-    // Perform sign up operation here
+    navigation.navigate('SignUp');
   }
 
   return (
