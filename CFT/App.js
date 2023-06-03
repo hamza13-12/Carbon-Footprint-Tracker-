@@ -6,10 +6,11 @@ import Home from './Home';
 import AccountCreationScreen from './Signupscreen'
 import BottomNav from './BottomNav';
 import { NavigationContainer } from '@react-navigation/native';
+import ManagementScreen from './ManagementScreen'
 
 export default function App() {
   return (
-    <BottomNav />
+    <ManagementScreen />
   );
 }
 

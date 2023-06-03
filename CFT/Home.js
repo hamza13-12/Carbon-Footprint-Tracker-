@@ -1,8 +1,6 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ImageBackground, Image, Dimensions, TouchableOpacity } from 'react-native';
-import BottomNav from './BottomNav';
-import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
 

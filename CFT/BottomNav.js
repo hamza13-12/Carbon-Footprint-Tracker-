@@ -51,16 +51,10 @@ const BottomNav = () => {
             >
                 <Tab.Screen name="Home" component={Home} />
                 <Tab.Screen name="Dashboard" component={DashboardScreen} />
-                <Tab.Screen name="Add data" component={Screen3} />
+                <Tab.Screen name="Add data" component={TrackcarbonScreen} />
                 <Tab.Screen name="Profile" component={Screen4} />
             </Tab.Navigator>
         </NavigationContainer>
-    );
-};
-
-const Screen3 = () => {
-    return (
-        <></>
     );
 };
 
