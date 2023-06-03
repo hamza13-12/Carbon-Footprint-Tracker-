@@ -23,12 +23,19 @@ const NewsFeed = () => {
 
   const renderItem = ({ item }) => (
     <TouchableOpacity activeOpacity={0.7} onPress={() => Linking.openURL(item.url)}>
-      <ImageBackground source={require("./assets/Card.png")} style={styles.cardContainer}>
-        <View style={styles.cardContent}>
-          <Text style={styles.title}>{item.title}</Text>
-          <Text numberOfLines={2} ellipsizeMode="tail" style={styles.description}>{item.description}</Text>
-        </View>
-      </ImageBackground>
+      <View style={styles.cardContainer}>
+        <ImageBackground source={require("./assets/Card.png")} style={styles.cardBackground}>
+          <View style={styles.cardContent}>
+            <View style={styles.imageContainer}>
+              <Image style={styles.image} source={{ uri: item.urlToImage }} />
+            </View>
+            <View style={styles.textContainer}>
+              <Text style={styles.title}>{item.title}</Text>
+              <Text numberOfLines={2} ellipsizeMode="tail" style={styles.description}>{item.description}</Text>
+            </View>
+          </View>
+        </ImageBackground>
+      </View>
     </TouchableOpacity>
   );
 
@@ -60,21 +67,41 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 20,
+    marginTop: 40,
     marginBottom: 10,
     color: '#fff',
   },
   cardContainer: {
     alignItems: 'center',
     margin: 10,
-    padding: 10,
     borderRadius: 10,
     overflow: 'hidden',
-    resizeMode: 'cover',
     height: 100,
   },
+  cardBackground: {
+    flex: 1,
+    flexDirection: 'row',
+    resizeMode: 'cover',
+  },
   cardContent: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 10,
+  },
+  imageContainer: {
+    width: 80,
+    height: '100%',
+    marginRight: 10,
+  },
+  image: {
     width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+    borderRadius: 10,
+  },
+  textContainer: {
+    flex: 1,
   },
   title: {
     fontSize: 18,
