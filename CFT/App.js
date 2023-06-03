@@ -19,10 +19,14 @@ export default function App() {
       <StatusBar style="light" backgroundColor="white" />
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Login" screenOptions={{
-            headerShown: false, // Set headerShown to false
+            headerTransparent: true,
+            headerTitle: '',
+            headerTintColor: 'white',
+            headerBackTitleVisible: true,
           }}>
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="SignUp" component={AccountCreationScreen} />
+          <Stack.Screen name="Home" component={Home} />
         </Stack.Navigator>
       </NavigationContainer>
     </View>

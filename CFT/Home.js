@@ -8,10 +8,6 @@ export default function App() {
   const cardWidth = Math.min(width, height) * 0.8;
   const cardHeight = cardWidth * 0.5;
 
-  const backNav = () => {
-    //Implement back navigation logic here
-  };
-
   const track = () => {
     //Implement track card logic here
   };
@@ -33,9 +29,7 @@ export default function App() {
     <View style={styles.container}>
       <StatusBar style="light" backgroundColor='white' />
       <ImageBackground source={require("./assets/bg.png")} style={styles.backgroundImage}>
-        <TouchableOpacity style={styles.backButton} onPress={backNav} activeOpacity={0.7}>
-          <Text style={styles.backButtonText}>&lt; Home</Text>
-        </TouchableOpacity>
+        
         <TouchableOpacity onPress={track} activeOpacity={0.7}>
           <View style={[styles.cardContainer, { marginTop: 40 }]} >
             <Image source={require("./assets/Card.png")} style={[styles.cardImage, { width: cardWidth, height: cardHeight }]} />

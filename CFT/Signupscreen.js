@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, ImageBackground, Keyboard } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Login from './Login';;
+import auth from './firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 const AccountCreationScreen = () => {
   const [name, setname] = useState('');
@@ -18,13 +21,17 @@ const AccountCreationScreen = () => {
     navigation.goBack();
   }
 
-  
-
   const handleCreateAccount = () => {
-    console.log('Name:', name);
-    console.log('Email Address:', email);
-    console.log('Username:', username);
-    console.log('Password:', password);
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log('User created:', user);
+        // Redirect or navigate to the home screen
+        navigation.navigate('Login');
+      })
+      .catch((error) => {
+        console.log('Account creation error:', error);
+      });
   };
 
   return (
@@ -120,19 +127,20 @@ const styles = StyleSheet.create({
     color: 'white'
   },
   button: {
-
     backgroundColor: 'rgba(51, 74, 0, 0.51)',
     borderRadius: 20,
     height: 30,
     width: 130,
     textAlign: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginTop: 15,
   },
   signup: {
     fontSize: 20,
     color: 'white',
     textAlign: 'center',
-    opacity: 0.75
+    opacity: 0.75,
+    
   },
   backgroundImage: {
     flex: 1,
@@ -140,8 +148,6 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
   }
-
-
 });
 
 export default AccountCreationScreen;

@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ImageBackground, Image, Dimensions, TextInput, TouchableOpacity, Keyboard, Button } from 'react-native';
 import Home from './Home';
 import { useNavigation } from '@react-navigation/native';
+import auth from './firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 export default function App() {
   const { width, height } = Dimensions.get('window');
@@ -11,14 +13,27 @@ export default function App() {
 
   const navigation = useNavigation();
 
+  //initializing the state variables
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const dismissKeyboard = () => {
     Keyboard.dismiss();
   };
 
   const handleLogin = () => {
-    // Perform login logic here
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      console.log('User logged in:', user);
+      // Redirect or navigate to the home screen
+      navigation.navigate('Home');
+    })
+    .catch((error) => {
+      console.log('Login error:', error);
+    });
   };
-  
+
   const handleSignUp = () => {
     navigation.navigate('SignUp');
   }
@@ -27,28 +42,27 @@ export default function App() {
     <View style={styles.container}>
       <StatusBar style="light" backgroundColor='white' />
       <ImageBackground source={require("./assets/bg.png")} style={styles.backgroundImage}>
-      <TouchableOpacity style={styles.touchable} onPress={dismissKeyboard} activeOpacity={1}>
-        <View style={styles.cardContainer}>
-          <Image source={require("./assets/Card.png")} style={[styles.cardImage, { width: cardWidth, height: cardHeight }]} />
-          <View style={styles.cardContent}>
-            <Text style={styles.cardText}>Welcome to </Text>
-            <Text style={styles.cardText}>Carbon Footprint Tracker </Text>
-            <Text style={{ fontSize: 20 , color: '#fff', marginTop: 20}}>Username</Text>
-            <TextInput style={styles.input} placeholder='username' placeholderTextColor='#888' />
-            <Text style={{ fontSize: 20 , color: '#fff', marginTop: 20}}>Password</Text>
-            <TextInput style={styles.input} placeholder='password' placeholderTextColor='#888' secureTextEntry/>
-            <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
+        <TouchableOpacity style={styles.touchable} onPress={dismissKeyboard} activeOpacity={1}>
+          <View style={styles.cardContainer}>
+            <Image source={require("./assets/Card.png")} style={[styles.cardImage, { width: cardWidth, height: cardHeight }]} />
+            <View style={styles.cardContent}>
+              <Text style={styles.cardText}>Welcome to </Text>
+              <Text style={styles.cardText}>Carbon Footprint Tracker </Text>
+              <Text style={{ fontSize: 20, color: '#fff', marginTop: 20 }}>Username</Text>
+              <TextInput style={styles.input} placeholder='username' placeholderTextColor='#888' onChangeText={(text) => setEmail(text)} />
+              <Text style={{ fontSize: 20, color: '#fff', marginTop: 20 }}>Password</Text>
+              <TextInput style={styles.input} placeholder='password' placeholderTextColor='#888' secureTextEntry onChangeText={(text) => setPassword(text)}/>
+              <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
                 <Text style={styles.loginButtonText}>Login</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleSignUp}> 
-              <Text style={styles.signupButtonText}>Sign Up!</Text>
-            </TouchableOpacity>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={handleSignUp}>
+                <Text style={styles.signupButtonText}>Sign Up!</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
         </TouchableOpacity>
       </ImageBackground>
     </View>
-    
   );
 }
 
