@@ -40,6 +40,7 @@ const TrackcarbonScreen = () => {
     console.log('total_emissions:', totalEmissions);
 
     const currentDate = new Date(); // Get the current date
+    const dayOfWeek = currentDate.toLocaleString('en-US', { weekday: 'long' });
 
     console.log('date:', currentDate);
 
@@ -53,6 +54,7 @@ const TrackcarbonScreen = () => {
           foodConsumption: food,
           totalEmission: totalEmissions,
           date: currentDate,
+          dayOfWeek: dayOfWeek,
         }),
         new Promise((_, reject) =>
           setTimeout(() => reject(new Error('Timeout')), 10000) // 10 seconds timeout

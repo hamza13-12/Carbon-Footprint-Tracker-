@@ -7,21 +7,45 @@ import { db } from './firebase';
 const DashboardScreen = () => {
   const [carbonData, setCarbonData] = useState([]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const q = query(
+        collection(db, 'entries'),
+        orderBy('dayOfWeek', 'asc'),
+        limit(5)
+      );
+      const querySnapshot = await getDocs(q);
+      const data = querySnapshot.docs.map((doc) => doc.data());
+      setCarbonData(data);
+    };
+
+    fetchData();
+  }, []);
+
+  const getUniqueDaysOfWeek = (carbonData) => {
+    const daysOfWeek = carbonData.map((item) => item.dayOfWeek);
+    return [...new Set(daysOfWeek)];
+  };
+
   const data = {
-    labels: ["January", "February", "March", "April", "May", "June"],
+    labels: getUniqueDaysOfWeek(carbonData),
     datasets: [
       {
-        data: [20, 45, 28, 80, 99, 43], 
+        data: carbonData.map((item) => item.totalEmission),
       }
     ],
-    legend: ["Rainy Days"] // optional
   };
 
   const chartConfig = {
-    backgroundGradientFrom: '#1E2923',
-    backgroundGradientTo: '#08130D',
-    color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
+    backgroundGradientFrom: '#E2CD96',
+    backgroundGradientTo: '#7A693E',
+    borderRadius: 43,
+    color: (opacity = 1) => `rgba(124, 23, 23)`,
   };
+
+  const generateData = () => {
+    //Add code here
+  }
 
   return (
     <View style={styles.backgroundImage}>
@@ -29,20 +53,22 @@ const DashboardScreen = () => {
         <View style={styles.container}>
           <Text style={styles.heading}>Carbon FootPrint Tracker</Text>
           <Text style={styles.content}>Track your daily carbon emissions and take action to reduce your impact on the environment. Log your daily activities such as transportation, energy use, and food consumption, and calculate your carbon footprint based on industry-standard emissions.</Text>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.track}>Track Your Carbon Footprint</Text>
+          <TouchableOpacity style={styles.button} onPress={generateData}>
+            <Text style={styles.track}> Generate Carbon FootPrint</Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.container2}>
-          <BarChart
-            data={data}
-            width={300}
-            height={220}
-            yAxisLabel="$"
-            verticalLabelRotation={30}
-            chartConfig={chartConfig}
-          />
-        </View>
+        {carbonData.length > 0 ? (
+          <View style={styles.container2}>
+            <BarChart
+              data={data}
+              width={300}
+              height={220}
+              
+              verticalLabelRotation={30}
+              chartConfig={chartConfig}
+            />
+          </View>
+        ) : null}
 
       </ImageBackground>
     </View>
@@ -142,9 +168,6 @@ const styles = StyleSheet.create({
     marginLeft: 160
 
   }
-
-
-
 });
 
 export default DashboardScreen;
