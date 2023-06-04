@@ -6,6 +6,7 @@ import { db } from './firebase';
 
 const DashboardScreen = () => {
   const [carbonData, setCarbonData] = useState([]);
+  const [isDataGenerated, setIsDataGenerated] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,25 +28,44 @@ const DashboardScreen = () => {
     return [...new Set(daysOfWeek)];
   };
 
-  const data = {
-    labels: getUniqueDaysOfWeek(carbonData),
-    datasets: [
-      {
-        data: carbonData.map((item) => item.totalEmission),
-      }
-    ],
-  };
-
-  const chartConfig = {
-    backgroundGradientFrom: '#E2CD96',
-    backgroundGradientTo: '#7A693E',
-    borderRadius: 43,
-    color: (opacity = 1) => `rgba(124, 23, 23)`,
-  };
-
   const generateData = () => {
-    //Add code here
-  }
+    // Add code here to generate data
+    setIsDataGenerated(true);
+  };
+
+  const renderGraph = () => {
+    if (!isDataGenerated) {
+      return null;
+    }
+
+    const data = {
+      labels: getUniqueDaysOfWeek(carbonData),
+      datasets: [
+        {
+          data: carbonData.map((item) => item.totalEmission),
+        }
+      ],
+    };
+
+    const chartConfig = {
+      backgroundGradientFrom: '#E2CD96',
+      backgroundGradientTo: '#7A693E',
+      borderRadius: 43,
+      color: (opacity = 1) => `rgba(124, 23, 23)`,
+    };
+
+    return (
+      <View style={styles.container2}>
+        <BarChart
+          data={data}
+          width={300}
+          height={220}
+          verticalLabelRotation={30}
+          chartConfig={chartConfig}
+        />
+      </View>
+    );
+  };
 
   return (
     <View style={styles.backgroundImage}>
@@ -57,19 +77,7 @@ const DashboardScreen = () => {
             <Text style={styles.track}> Generate Carbon FootPrint</Text>
           </TouchableOpacity>
         </View>
-        {carbonData.length > 0 ? (
-          <View style={styles.container2}>
-            <BarChart
-              data={data}
-              width={300}
-              height={220}
-              
-              verticalLabelRotation={30}
-              chartConfig={chartConfig}
-            />
-          </View>
-        ) : null}
-
+        {renderGraph()}
       </ImageBackground>
     </View>
   );
@@ -77,23 +85,33 @@ const DashboardScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
+    display: "flex",
     width: 359,
     height: 200,
-    marginTop: 550,
-    marginLeft: 24,
-    //   marginBottom:600,
-    marginRight: 100,
+    justifyContent: "center",
+    alignSelf: "center",
+    backgroundColor: 'rgba(4,118,70,0.24)',
+    opacity: 1,
+    padding: 16,
+    color: 'white',
+    position: "absolute",
+    top: 73,
+  },
+  container2: {
+    display: "flex",
+    width: 359,
+    height: 271,
+    marginTop: 170,
+    alignItems: "center",
+    alignSelf: "center",
     backgroundColor: 'rgba(4,118,70,0.24)',
     opacity: 1,
     justifyContent: 'center',
-    //alignItems: 'center',
     padding: 16,
-    color: 'white',
-
+    color: 'white'
   },
   heading: {
     fontSize: 20,
-    // fontstyle: 'bold',
     fontWeight: 'bold',
     marginTop: 3,
     marginBottom: 10,
@@ -122,52 +140,12 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
   },
-  container2: {
-    width: 359,
-    height: 271,
-    marginBottom: 600,
-    marginTop: 10,
-    marginLeft: 24,
-
-    backgroundColor: 'rgba(4,118,70,0.24)',
-    opacity: 1,
-    justifyContent: 'center',
-    //   alignItems: 'center',
-    padding: 16,
-    color: 'white'
-
-  },
   content: {
     marginBottom: 15,
     marginTop: 2,
     color: 'white',
     opacity: 0.75
-
   },
-  content2: {
-    fontSize: 20,
-    // fontstyle: 'bold',
-    fontWeight: 'bold',
-    color: 'white',
-    textAlign: 'center',
-    position: "absolute",
-    top: 10,
-    marginHorizontal: 80,
-  },
-  content3: {
-    fontSize: 15,
-    color: 'white',
-    opacity: 0.75,
-    marginBottom: 10
-  },
-  content4: {
-    fontSize: 15,
-    color: 'white',
-    opacity: 0.75,
-    marginBottom: 220,
-    marginLeft: 160
-
-  }
 });
 
 export default DashboardScreen;
