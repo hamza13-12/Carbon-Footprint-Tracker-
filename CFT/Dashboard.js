@@ -1,49 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Button, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
 import { BarChart } from 'react-native-chart-kit';
-import { collection, query, where, getDocs } from 'firebase/firestore';
+import { collection, query, where, getDocs, orderBy, limit } from 'firebase/firestore';
 import { db } from './firebase';
 
 const DashboardScreen = () => {
   const [carbonData, setCarbonData] = useState([]);
 
-  useEffect(() => {
-    fetchCarbonData();
-  }, []);
-
-  const fetchCarbonData = async () => {
-    try {
-      const entriesRef = collection(db, 'entries');
-      const q = query(entriesRef);
-      const querySnapshot = await getDocs(q);
-
-      const data = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-
-      setCarbonData(data);
-    } catch (error) {
-      console.error('Error fetching carbon data:', error);
-    }
+  const data = {
+    labels: ["January", "February", "March", "April", "May", "June"],
+    datasets: [
+      {
+        data: [20, 45, 28, 80, 99, 43], 
+      }
+    ],
+    legend: ["Rainy Days"] // optional
   };
 
-  const generateChartData = () => {
-    const chartData = {
-      labels: [],
-      datasets: [
-        {
-          data: [],
-        },
-      ],
-    };
-
-    carbonData.forEach((entry) => {
-      chartData.labels.push(entry.date); // Use the entry ID as the label
-      chartData.datasets[0].data.push(entry.totalEmission); // Use the totalEmission value from the entry
-    });
-
-    console.log('chartdata', chartData)
+  const chartConfig = {
+    backgroundGradientFrom: '#1E2923',
+    backgroundGradientTo: '#08130D',
+    color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
   };
 
   return (
@@ -52,14 +29,19 @@ const DashboardScreen = () => {
         <View style={styles.container}>
           <Text style={styles.heading}>Carbon FootPrint Tracker</Text>
           <Text style={styles.content}>Track your daily carbon emissions and take action to reduce your impact on the environment. Log your daily activities such as transportation, energy use, and food consumption, and calculate your carbon footprint based on industry-standard emissions.</Text>
-          <TouchableOpacity style={styles.button} onPress={generateChartData}>
+          <TouchableOpacity style={styles.button}>
             <Text style={styles.track}>Track Your Carbon Footprint</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.container2}>
-          <Text style={styles.content2}>Carbon Footprint Over Time</Text>
-          <Text style={styles.content3}>View Data:</Text>
-          <Text style={styles.content4}>Total Emission:</Text>
+          <BarChart
+            data={data}
+            width={300}
+            height={220}
+            yAxisLabel="$"
+            verticalLabelRotation={30}
+            chartConfig={chartConfig}
+          />
         </View>
 
       </ImageBackground>
@@ -140,10 +122,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     // fontstyle: 'bold',
     fontWeight: 'bold',
-    marginTop: 50,
-    marginBottom: 10,
     color: 'white',
-    textAlign: 'left'
+    textAlign: 'center',
+    position: "absolute",
+    top: 10,
+    marginHorizontal: 80,
   },
   content3: {
     fontSize: 15,

@@ -18,7 +18,7 @@ const TrackcarbonScreen = () => {
     // Convert user inputs to numbers
     const transportationKm = parseFloat(transportation);
     const fuelEfficiencyFraction = fuelEfficiency.split('/');
-    const fuelEfficiencyValue = parseFloat(fuelEfficiencyFraction[0]) / parseFloat(fuelEfficiencyFraction[1]);
+    const fuelEfficiencyValue = parseFloat(fuelEfficiencyFraction[0]) / parseFloat(fuelEfficiencyFraction[1])
     const energyUseKWh = parseFloat(energyuse);
     const foodConsumptionKg = parseFloat(food);
 
@@ -96,7 +96,6 @@ const TrackcarbonScreen = () => {
               placeholderTextColor={' rgba(255, 255, 255, 0.5)'}
               value={fuelEfficiency}
               onChangeText={text => setFuelEfficiency(text)}
-              
             />
             <TextInput
               color="white"
