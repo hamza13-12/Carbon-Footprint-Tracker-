@@ -18,6 +18,10 @@ const TrackcarbonScreen = () => {
     console.log('energyuse:', energyuse);
     console.log('food:', food);
 
+    const currentDate = new Date(); // Get the current date
+
+    console.log('date:', currentDate);
+
     // Save the entry data to Firebase
     try {
       const docRef = await Promise.race([
@@ -26,6 +30,7 @@ const TrackcarbonScreen = () => {
           transportation,
           energyUse: energyuse,
           foodConsumption: food,
+          date: currentDate,
         }),
         new Promise((_, reject) =>
           setTimeout(() => reject(new Error('Timeout')), 10000) // 10 seconds timeout
@@ -55,7 +60,7 @@ const TrackcarbonScreen = () => {
             <TextInput
               color="white"
               style={styles.input}
-              placeholder="Transportation"
+              placeholder="Transportation (km)"
               placeholderTextColor={' rgba(255, 255, 255, 0.5)'}
               value={transportation}
               onChangeText={(text) => settransport(text)}
@@ -63,7 +68,7 @@ const TrackcarbonScreen = () => {
             <TextInput
               color="white"
               style={styles.input}
-              placeholder="Energy Use"
+              placeholder="Energy Use (kWH)"
               placeholderTextColor={' rgba(255, 255, 255, 0.5)'}
               value={energyuse}
               onChangeText={(text) => setenergy(text)}
@@ -72,7 +77,7 @@ const TrackcarbonScreen = () => {
             <TextInput
               color="white"
               style={styles.input}
-              placeholder="Food Consumption"
+              placeholder="Food Consumption (kg)"
               placeholderTextColor={' rgba(255, 255, 255, 0.5)'}
 
               value={food}
