@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, ImageBackground, Image, Dimensions, TextInput, 
 import Home from './Home';
 import { useNavigation } from '@react-navigation/native';
 import auth from './firebase';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 export default function App() {
   const { width, height } = Dimensions.get('window');
@@ -21,7 +21,10 @@ export default function App() {
     Keyboard.dismiss();
   };
 
+  
+
   const handleLogin = () => {
+    const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;

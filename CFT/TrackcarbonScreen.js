@@ -1,15 +1,40 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, ImageBackground, Keyboard } from 'react-native';
+import { auth, db } from './firebase';
+import { collection, addDoc } from 'firebase/firestore';
 
 const TrackcarbonScreen = () => {
   const [transportation, settransport] = useState('');
   const [energyuse, setenergy] = useState('');
   const [food, setfood] = useState('');
 
-  const handletrackcarbon = () => {
-    console.log('Transportation:', transportation);
-    console.log('Energy Use:', energyuse);
-    console.log('Food Consumption:', food);
+  const handletrackcarbon = async () => {
+    console.log('handletrackcarbon called');
+    const currentUser = auth.currentUser;
+    const userId = auth.currentUser.uid;
+    //In Firebase Authentication, each user has a unique identifier (UID) associated with their account.
+
+    console.log('transportation:', transportation);
+    console.log('energyuse:', energyuse);
+    console.log('food:', food);
+
+    // Save the entry data to Firebase
+    try {
+      const docRef = await Promise.race([
+        addDoc(collection(db, 'entries'), {
+          userId,
+          transportation,
+          energyUse: energyuse,
+          foodConsumption: food,
+        }),
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new Error('Timeout')), 10000) // 10 seconds timeout
+        ),
+      ]);
+      console.log('Entry saved with ID: ', docRef.id);
+    } catch (error) {
+      console.error('Error adding entry: ', error);
+    }
   };
 
   const dismissKeyboard = () => {
@@ -53,7 +78,6 @@ const TrackcarbonScreen = () => {
 
 
             <TouchableOpacity style={styles.button} onPress={handletrackcarbon}>
-
               <Text style={styles.entry}>Add Entry</Text>
             </TouchableOpacity>
 
