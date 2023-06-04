@@ -3,41 +3,32 @@ import { View, Text, Button, StyleSheet, TouchableOpacity, ImageBackground } fro
 import { BarChart } from 'react-native-chart-kit';
 import { collection, query, where, getDocs, orderBy, limit } from 'firebase/firestore';
 import { db } from './firebase';
-import { getAuth } from 'firebase/auth';
-
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 const DashboardScreen = () => {
   const [carbonData, setCarbonData] = useState([]);
   const [isDataGenerated, setIsDataGenerated] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const user = getAuth().currentUser;
-
+  const generateData = async () => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
       if (user) {
-        const userId = user.uid;
-
-        const q = query(
-          collection(db, 'entries'),
-          where('userId', '==', userId),
-          orderBy('dayOfWeek', 'asc'),
-          limit(5)
-        );
-        const querySnapshot = await getDocs(q);
-        const data = querySnapshot.docs.map((doc) => doc.data());
-        setCarbonData(data);
+        fetchData(user.uid);
       }
-    };
-
-    fetchData();
-  }, []);
-
-  const getUniqueDaysOfWeek = (carbonData) => {
-    const daysOfWeek = carbonData.map((item) => item.dayOfWeek);
-    return [...new Set(daysOfWeek)];
+    });
   };
 
-  const generateData = () => {
+  const fetchData = async (userId) => {
+    const q = query(
+      collection(db, 'entries'),
+      where('userId', '==', userId),
+      orderBy('dayOfWeek', 'asc'),
+      limit(5)
+    );
+
+    const querySnapshot = await getDocs(q);
+    const data = querySnapshot.docs.map((doc) => doc.data());
+    setCarbonData(data);
     setIsDataGenerated(true);
   };
 
@@ -46,13 +37,16 @@ const DashboardScreen = () => {
       return null;
     }
 
+    const labels = carbonData.map((item) => item.dayOfWeek);
+    const datasets = [
+      {
+        data: carbonData.map((item) => item.totalEmission),
+      },
+    ];
+
     const data = {
-      labels: getUniqueDaysOfWeek(carbonData),
-      datasets: [
-        {
-          data: carbonData.map((item) => item.totalEmission),
-        }
-      ],
+      labels,
+      datasets,
     };
 
     const chartConfig = {
