@@ -29,7 +29,6 @@ const DashboardScreen = () => {
   };
 
   const generateData = () => {
-    // Add code here to generate data
     setIsDataGenerated(true);
   };
 
