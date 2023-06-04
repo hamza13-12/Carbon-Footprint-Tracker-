@@ -1,15 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Image } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import { auth } from './firebase';
 
 const Profile = () => {
   const [profileImage, setProfileImage] = useState(null);
+  const [userName, setUserName] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+
+  useEffect(() => {
+    // Retrieve user data from Firebase
+    const user = auth.currentUser;
+    if (user) {
+      // User is signed in
+      setUserName(user.displayName);
+      setUserEmail(user.email);
+    } else {
+      // No user is signed in
+      setUserName('');
+      setUserEmail('');
+    }
+  }, []);
 
   const updateinfo = () => {
   };
 
   const pickImage = async () => {
-    // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
@@ -38,8 +54,8 @@ const Profile = () => {
             </View>
           </TouchableOpacity>
           <View style={styles.c2}>
-            <Text style={[styles.heading, { marginLeft: 15 }]}>Shaheen Amir</Text>
-            <Text style={[styles.content, {marginLeft: 15}]}>shaheenamir@gmail.com</Text>
+            <Text style={[styles.heading, { marginLeft: 15 }]}>{userName}</Text>
+            <Text style={[styles.content, { marginLeft: 15 }]}>{userEmail}</Text>
           </View>
         </View>
         <View style={styles.container2}>

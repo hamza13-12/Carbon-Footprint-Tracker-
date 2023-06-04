@@ -3,7 +3,7 @@ import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, ImageBackg
 import { useNavigation } from '@react-navigation/native';
 import Login from './Login';;
 import auth from './firebase';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 
 const AccountCreationScreen = () => {
   const [name, setname] = useState('');
@@ -28,6 +28,16 @@ const AccountCreationScreen = () => {
         const user = userCredential.user;
         console.log('User created:', user);
         // Redirect or navigate to the home screen
+
+        // Update the user's profile with the full name
+        updateProfile(user, {
+          displayName: name,
+        }).then(() => {
+          console.log('User profile updated with full name');
+        }).catch((error) => {
+          console.log('Error updating user profile:', error);
+        });
+
         navigation.navigate('Login');
       })
       .catch((error) => {
@@ -141,7 +151,7 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     opacity: 0.75,
-    
+
   },
   backgroundImage: {
     flex: 1,
