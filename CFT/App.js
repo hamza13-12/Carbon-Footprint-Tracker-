@@ -44,7 +44,6 @@ const MainScreens = () => {
   );
 };
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
