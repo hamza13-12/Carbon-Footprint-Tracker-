@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Image } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { auth } from './firebase';
+// import { AdMobBanner } from 'react-native-admob';
 
 const Profile = () => {
   const [profileImage, setProfileImage] = useState(null);
@@ -20,6 +21,17 @@ const Profile = () => {
       setUserName('');
       setUserEmail('');
     }
+    // const AdBanner = () => {
+    //   return (
+    //     <View>
+    //       <AdMobBanner
+    //         adSize="smartBanner"
+    //         adUnitID=""
+    //         testDevices={[AdMobBanner.simulatorId]}
+    //         onAdFailedToLoad={(error) => console.error(error)}
+    //       />  </View>
+    //       );
+    //     };
   }, []);
 
   const updateinfo = () => {
@@ -69,6 +81,13 @@ const Profile = () => {
             <Text style={styles.updateinfo}>Update User Information</Text>
           </TouchableOpacity>
         </View>
+        <View>
+          <Image
+            source={require("./assets/Google-Ads.jpg")}
+            style={styles.googleadd}
+          />
+        </View>
+        {/* <AdBanner /> */}
       </ImageBackground>
     </View>);
 };
@@ -124,7 +143,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     width: 350,
     height: 250,
-    marginBottom: 600,
+    marginBottom: 120,
     marginTop: 10,
     borderRadius: 39,
     backgroundColor: ' rgba(4, 118, 70, 0.54)',
@@ -192,6 +211,12 @@ const styles = StyleSheet.create({
     height: '100%',
     borderRadius: 100 / 2,
     resizeMode: 'cover'
+  },
+  googleadd: {
+    marginBottom: 350,
+    marginLeft: 15,
+    height: 75,
+    width: 350
   }
 });
 
