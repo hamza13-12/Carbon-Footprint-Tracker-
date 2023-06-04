@@ -1,27 +1,70 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Button, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
-// import { Ionicons } from '@expo/vector-icons';
+import { BarChart } from 'react-native-chart-kit';
+import { collection, query, where, getDocs } from 'firebase/firestore';
+import { db } from './firebase';
 
 const DashboardScreen = () => {
-  const Trackcarbon = () => {
-  };
-  return (<View style={styles.backgroundImage}>
-    <ImageBackground source={require("./assets/bg.png")} style={styles.backgroundImage}>
-      <View style={styles.container}>
-        <Text style={styles.heading}>Carbon FootPrint Tracker</Text>
-        <Text style={styles.content}>Track your daily carbon emissions and take action to reduce your impact on the environment. Log your daily activities such as transportation, energy use, and food consumption, and calculate your carbon footprint based on industry-standard emissions.</Text>
-        <TouchableOpacity style={styles.button} onPress={Trackcarbon}>
-          <Text style={styles.track}>Track Your Carbon Footprint</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.container2}>
-        <Text style={styles.content2}>Carbon Footprint Over Time</Text>
-        <Text style={styles.content3}>View Data:</Text>
-        <Text style={styles.content4}>Total Emission:</Text>
-      </View>
+  const [carbonData, setCarbonData] = useState([]);
 
-    </ImageBackground>
-  </View>);
+  useEffect(() => {
+    fetchCarbonData();
+  }, []);
+
+  const fetchCarbonData = async () => {
+    try {
+      const entriesRef = collection(db, 'entries');
+      const q = query(entriesRef);
+      const querySnapshot = await getDocs(q);
+
+      const data = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      setCarbonData(data);
+    } catch (error) {
+      console.error('Error fetching carbon data:', error);
+    }
+  };
+
+  const generateChartData = () => {
+    const chartData = {
+      labels: [],
+      datasets: [
+        {
+          data: [],
+        },
+      ],
+    };
+
+    carbonData.forEach((entry) => {
+      chartData.labels.push(entry.date); // Use the entry ID as the label
+      chartData.datasets[0].data.push(entry.totalEmission); // Use the totalEmission value from the entry
+    });
+
+    console.log('chartdata', chartData)
+  };
+
+  return (
+    <View style={styles.backgroundImage}>
+      <ImageBackground source={require("./assets/bg.png")} style={styles.backgroundImage}>
+        <View style={styles.container}>
+          <Text style={styles.heading}>Carbon FootPrint Tracker</Text>
+          <Text style={styles.content}>Track your daily carbon emissions and take action to reduce your impact on the environment. Log your daily activities such as transportation, energy use, and food consumption, and calculate your carbon footprint based on industry-standard emissions.</Text>
+          <TouchableOpacity style={styles.button} onPress={generateChartData}>
+            <Text style={styles.track}>Track Your Carbon Footprint</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.container2}>
+          <Text style={styles.content2}>Carbon Footprint Over Time</Text>
+          <Text style={styles.content3}>View Data:</Text>
+          <Text style={styles.content4}>Total Emission:</Text>
+        </View>
+
+      </ImageBackground>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
