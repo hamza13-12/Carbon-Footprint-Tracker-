@@ -3,6 +3,8 @@ import { View, Text, Button, StyleSheet, TouchableOpacity, ImageBackground } fro
 import { BarChart } from 'react-native-chart-kit';
 import { collection, query, where, getDocs, orderBy, limit } from 'firebase/firestore';
 import { db } from './firebase';
+import { getAuth } from 'firebase/auth';
+
 
 const DashboardScreen = () => {
   const [carbonData, setCarbonData] = useState([]);
@@ -10,14 +12,21 @@ const DashboardScreen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const q = query(
-        collection(db, 'entries'),
-        orderBy('dayOfWeek', 'asc'),
-        limit(5)
-      );
-      const querySnapshot = await getDocs(q);
-      const data = querySnapshot.docs.map((doc) => doc.data());
-      setCarbonData(data);
+      const user = getAuth().currentUser;
+
+      if (user) {
+        const userId = user.uid;
+
+        const q = query(
+          collection(db, 'entries'),
+          where('userId', '==', userId),
+          orderBy('dayOfWeek', 'asc'),
+          limit(5)
+        );
+        const querySnapshot = await getDocs(q);
+        const data = querySnapshot.docs.map((doc) => doc.data());
+        setCarbonData(data);
+      }
     };
 
     fetchData();
