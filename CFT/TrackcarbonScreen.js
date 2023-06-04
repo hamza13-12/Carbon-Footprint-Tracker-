@@ -15,7 +15,7 @@ const TrackcarbonScreen = () => {
   const dismissKeyboard = () => {
     Keyboard.dismiss();
   };
-  
+
   return (
     <View style={styles.backgroundImage}>
       <ImageBackground source={require("./assets/bg.png")} style={styles.backgroundImage}>
