@@ -5,6 +5,7 @@ import { collection, addDoc } from 'firebase/firestore';
 
 const TrackcarbonScreen = () => {
   const [transportation, settransport] = useState('');
+  const [fuelEfficiency, setFuelEfficiency] = useState('');
   const [energyuse, setenergy] = useState('');
   const [food, setfood] = useState('');
 
@@ -14,9 +15,29 @@ const TrackcarbonScreen = () => {
     const userId = auth.currentUser.uid;
     //In Firebase Authentication, each user has a unique identifier (UID) associated with their account.
 
+    // Convert user inputs to numbers
+    const transportationKm = parseFloat(transportation);
+    const fuelEfficiencyFraction = fuelEfficiency.split('/');
+    const fuelEfficiencyValue = parseFloat(fuelEfficiencyFraction[0]) / parseFloat(fuelEfficiencyFraction[1]);
+    const energyUseKWh = parseFloat(energyuse);
+    const foodConsumptionKg = parseFloat(food);
+
+    // Calculate fuel consumption in liters
+    const fuelConsumptionL = transportationKm * fuelEfficiencyValue
+
+    // Calculate emissions based on the emissions factors
+    const transportationEmissions = fuelConsumptionL * 2.4; // 2.4 kg CO2 per liter of gasoline
+    const energyEmissions = energyUseKWh * 0.5; // 0.5 kg CO2 per kWh
+    const foodEmissions = foodConsumptionKg * 3; // 3 kg CO2 per kg
+
+    // Calculate the total emissions
+    const totalEmissions = transportationEmissions + energyEmissions + foodEmissions;
+
     console.log('transportation:', transportation);
+    console.log('fuel efficiency:', fuelConsumptionL);
     console.log('energyuse:', energyuse);
     console.log('food:', food);
+    console.log('total_emissions:', totalEmissions);
 
     const currentDate = new Date(); // Get the current date
 
@@ -30,6 +51,7 @@ const TrackcarbonScreen = () => {
           transportation,
           energyUse: energyuse,
           foodConsumption: food,
+          totalEmission: totalEmissions,
           date: currentDate,
         }),
         new Promise((_, reject) =>
@@ -40,6 +62,7 @@ const TrackcarbonScreen = () => {
       settransport('');
       setenergy('');
       setfood('');
+      setFuelEfficiency('');
     } catch (error) {
       console.error('Error adding entry: ', error);
     }
@@ -64,6 +87,16 @@ const TrackcarbonScreen = () => {
               placeholderTextColor={' rgba(255, 255, 255, 0.5)'}
               value={transportation}
               onChangeText={(text) => settransport(text)}
+              keyboardType="numeric"
+            />
+            <TextInput
+              color="white"
+              style={styles.input}
+              placeholder="Fuel Efficiency (L/km)"
+              placeholderTextColor={' rgba(255, 255, 255, 0.5)'}
+              value={fuelEfficiency}
+              onChangeText={text => setFuelEfficiency(text)}
+              
             />
             <TextInput
               color="white"
@@ -72,16 +105,16 @@ const TrackcarbonScreen = () => {
               placeholderTextColor={' rgba(255, 255, 255, 0.5)'}
               value={energyuse}
               onChangeText={(text) => setenergy(text)}
-
+              keyboardType="numeric"
             />
             <TextInput
               color="white"
               style={styles.input}
               placeholder="Food Consumption (kg)"
               placeholderTextColor={' rgba(255, 255, 255, 0.5)'}
-
               value={food}
               onChangeText={(text) => setfood(text)}
+              keyboardType="numeric"
             />
 
 
@@ -99,8 +132,8 @@ const TrackcarbonScreen = () => {
 const styles = StyleSheet.create({
   container: {
     // width:344,
-    height: 450,
-    marginTop: 20,
+    height: 500,
+    marginTop: 60,
     marginLeft: 24,
     marginBottom: 280,
     marginRight: 32,
@@ -117,7 +150,7 @@ const styles = StyleSheet.create({
     // fontstyle: 'bold',
     fontWeight: 'bold',
     marginTop: 0,
-    marginBottom: 50,
+    marginBottom: 30,
     color: 'white'
   },
   input: {
@@ -135,7 +168,7 @@ const styles = StyleSheet.create({
     height: 40,
     width: 130,
     textAlign: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   entry: {
     fontSize: 20,
