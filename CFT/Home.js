@@ -23,7 +23,7 @@ export default function App() {
   };
 
   const start_track = () => {
-    //Implement connect card logic here
+    navigation.navigate('TrackcarbonScreen');
   };
 
 

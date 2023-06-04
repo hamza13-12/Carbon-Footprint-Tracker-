@@ -9,6 +9,7 @@ import BottomNav from './BottomNav';
 import Home from './Home';
 import ManagementScreen from './ManagementScreen';
 import NewsFeed from './NewsFeed';
+import TrackcarbonScreen from './TrackcarbonScreen';
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,7 @@ export default function App() {
           <Stack.Screen name="SignUp" component={AccountCreationScreen} />
           <Stack.Screen name="Main" component={MainScreens} />
           <Stack.Screen name="NewsFeed" component={NewsFeed} />
+          <Stack.Screen name="TrackcarbonScreen" component={TrackcarbonScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </View>
