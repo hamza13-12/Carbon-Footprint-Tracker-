@@ -61,7 +61,7 @@ const DashboardScreen = () => {
         <BarChart
           data={data}
           width={300}
-          height={220}
+          height={260}
           verticalLabelRotation={30}
           chartConfig={chartConfig}
         />
@@ -102,8 +102,8 @@ const styles = StyleSheet.create({
   container2: {
     display: "flex",
     width: 359,
-    height: 271,
-    marginTop: 170,
+    height: 300,
+    marginTop: 190,
     alignItems: "center",
     alignSelf: "center",
     backgroundColor: 'rgba(4,118,70,0.24)',
