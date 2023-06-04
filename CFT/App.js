@@ -26,6 +26,7 @@ export default function App() {
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="SignUp" component={AccountCreationScreen} />
           <Stack.Screen name="Main" component={MainScreens} />
+          <Stack.Screen name="NewsFeed" component={NewsFeed} />
         </Stack.Navigator>
       </NavigationContainer>
     </View>
@@ -36,12 +37,17 @@ const MainScreens = () => {
   return (
     <View style={styles.container}>
       <StatusBar style="light" backgroundColor="white" />
-      <Stack.Navigator screenOptions={{headerShown: 'false'}}>
-        <Stack.Screen name="Home" component={BottomNav} options={{ headerShown: false }}/>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Home" options={{ headerShown: false }}>
+          {(props) => <Home {...props} navigation={props.navigation} />}
+        </Stack.Screen>
       </Stack.Navigator>
     </View>
   );
 };
+
+
+
 
 const styles = StyleSheet.create({
   container: {

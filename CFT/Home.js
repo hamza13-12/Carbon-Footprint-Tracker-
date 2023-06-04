@@ -1,7 +1,9 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ImageBackground, Image, Dimensions, TouchableOpacity } from 'react-native';
-
+import { useNavigation } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
+import NewsFeed from './NewsFeed';
 
 export default function App() {
 
@@ -9,12 +11,14 @@ export default function App() {
   const cardWidth = Math.min(width, height) * 0.8;
   const cardHeight = cardWidth * 0.5;
 
+  const navigation = useNavigation();
+
   const track = () => {
     //Implement track card logic here
   };
 
   const reduce = () => {
-    //Implement reduce card logic here
+    navigation.navigate('NewsFeed')
   };
 
   const connect = () => {
@@ -30,28 +34,28 @@ export default function App() {
     <View style={styles.container}>
       <StatusBar style="light" backgroundColor='white' />
       <ImageBackground source={require("./assets/bg.png")} style={styles.backgroundImage}>
-        <TouchableOpacity onPress={track} activeOpacity={0.7}>
-          <View style={[styles.cardContainer, { marginTop: 40 }]} >
-            <Image source={require("./assets/Card.png")} style={[styles.cardImage, { width: cardWidth, height: cardHeight }]} />
-            <View style={styles.cardContent}>
-              <Text style={styles.cardText}> Track Your Carbon Footprint </Text>
-              <Text style={styles.cardDescription}> Log your daily activities such as </Text>
-              <Text style={styles.cardDescription}> transportation, energy use, and food  </Text>
-              <Text style={styles.cardDescription}> consumption, and calculate your carbon </Text>
-              <Text style={styles.cardDescription}> footprint based on industry-standard </Text>
-              <Text style={styles.cardDescription}> emissions data. </Text>
-            </View>
+
+        <View style={[styles.cardContainer, { marginTop: 40 }]} >
+          <Image source={require("./assets/Card.png")} style={[styles.cardImage, { width: cardWidth, height: cardHeight }]} />
+          <View style={styles.cardContent}>
+            <Text style={styles.cardText}> Track Your Carbon Footprint </Text>
+            <Text style={styles.cardDescription}> Log your daily activities such as </Text>
+            <Text style={styles.cardDescription}> transportation, energy use, and food  </Text>
+            <Text style={styles.cardDescription}> consumption, and calculate your carbon </Text>
+            <Text style={styles.cardDescription}> footprint based on industry-standard </Text>
+            <Text style={styles.cardDescription}> emissions data. </Text>
           </View>
-        </TouchableOpacity>
+        </View>
+
 
         <TouchableOpacity onPress={reduce} activeOpacity={0.7}>
           <View style={styles.cardContainer}>
             <Image source={require("./assets/Card.png")} style={[styles.cardImage, { width: cardWidth, height: cardHeight }]} />
             <View style={styles.cardContent}>
-              <Text style={styles.cardText}> Reduce Your Impact </Text>
-              <Text style={styles.cardDescription}> Get personalized recommendations for </Text>
-              <Text style={styles.cardDescription}> reducing your carbon footprint and track  </Text>
-              <Text style={styles.cardDescription}> your progress over time.  </Text>
+              <Text style={styles.cardText}> Embrace a Green Lifestyle </Text>
+              <Text style={styles.cardDescription}> Catch up on the latest news and gain </Text>
+              <Text style={styles.cardDescription}> the knowledge necessary to reduce  </Text>
+              <Text style={styles.cardDescription}> your carbon footprint over time.  </Text>
             </View>
           </View>
         </TouchableOpacity>
@@ -68,7 +72,7 @@ export default function App() {
             </View>
           </View>
         </TouchableOpacity>
-        
+
         <TouchableOpacity style={styles.trackButton} onPress={start_track} activeOpacity={0.7}>
           <Text style={styles.cardDescription}>Start Tracking</Text>
         </TouchableOpacity>
