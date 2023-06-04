@@ -32,6 +32,9 @@ const TrackcarbonScreen = () => {
         ),
       ]);
       console.log('Entry saved with ID: ', docRef.id);
+      settransport('');
+      setenergy('');
+      setfood('');
     } catch (error) {
       console.error('Error adding entry: ', error);
     }
