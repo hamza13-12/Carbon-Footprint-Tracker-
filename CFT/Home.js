@@ -2,8 +2,7 @@ import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ImageBackground, Image, Dimensions, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { NavigationContainer } from '@react-navigation/native';
-import NewsFeed from './NewsFeed';
+import { Linking } from 'react-native';
 
 export default function App() {
 
@@ -12,17 +11,14 @@ export default function App() {
   const cardHeight = cardWidth * 0.5;
 
   const navigation = useNavigation();
-
-  const track = () => {
-    //Implement track card logic here
-  };
-
+  
   const reduce = () => {
     navigation.navigate('NewsFeed')
   };
 
   const connect = () => {
-    //Implement connect card logic here
+    const facebookGroupURL = 'https://www.facebook.com/groups/421847534837144';
+    Linking.openURL(facebookGroupURL);
   };
 
   const start_track = () => {
