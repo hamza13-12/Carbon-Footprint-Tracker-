@@ -2,6 +2,7 @@ import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ImageBackground, Image, Dimensions, TouchableOpacity } from 'react-native';
 
+
 export default function App() {
 
   const { width, height } = Dimensions.get('window');
@@ -29,7 +30,6 @@ export default function App() {
     <View style={styles.container}>
       <StatusBar style="light" backgroundColor='white' />
       <ImageBackground source={require("./assets/bg.png")} style={styles.backgroundImage}>
-        
         <TouchableOpacity onPress={track} activeOpacity={0.7}>
           <View style={[styles.cardContainer, { marginTop: 40 }]} >
             <Image source={require("./assets/Card.png")} style={[styles.cardImage, { width: cardWidth, height: cardHeight }]} />

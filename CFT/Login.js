@@ -27,7 +27,7 @@ export default function App() {
       const user = userCredential.user;
       console.log('User logged in:', user);
       // Redirect or navigate to the home screen
-      navigation.navigate('Home');
+      navigation.navigate('Main');
     })
     .catch((error) => {
       console.log('Login error:', error);
@@ -48,8 +48,8 @@ export default function App() {
             <View style={styles.cardContent}>
               <Text style={styles.cardText}>Welcome to </Text>
               <Text style={styles.cardText}>Carbon Footprint Tracker </Text>
-              <Text style={{ fontSize: 20, color: '#fff', marginTop: 20 }}>Username</Text>
-              <TextInput style={styles.input} placeholder='username' placeholderTextColor='#888' onChangeText={(text) => setEmail(text)} />
+              <Text style={{ fontSize: 20, color: '#fff', marginTop: 20 }}>Email</Text>
+              <TextInput style={styles.input} placeholder='email' placeholderTextColor='#888' onChangeText={(text) => setEmail(text)} />
               <Text style={{ fontSize: 20, color: '#fff', marginTop: 20 }}>Password</Text>
               <TextInput style={styles.input} placeholder='password' placeholderTextColor='#888' secureTextEntry onChangeText={(text) => setPassword(text)}/>
               <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
