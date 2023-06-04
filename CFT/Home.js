@@ -3,6 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ImageBackground, Image, Dimensions, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Linking } from 'react-native';
+import BottomNav from './BottomNav';
 
 export default function App() {
 
@@ -11,9 +12,9 @@ export default function App() {
   const cardHeight = cardWidth * 0.5;
 
   const navigation = useNavigation();
-  
+
   const reduce = () => {
-    navigation.navigate('NewsFeed')
+    navigation.navigate('NewsFeed');
   };
 
   const connect = () => {
@@ -28,9 +29,10 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+
       <StatusBar style="light" backgroundColor='white' />
       <ImageBackground source={require("./assets/bg.png")} style={styles.backgroundImage}>
-
+        
         <View style={[styles.cardContainer, { marginTop: 40 }]} >
           <Image source={require("./assets/Card.png")} style={[styles.cardImage, { width: cardWidth, height: cardHeight }]} />
           <View style={styles.cardContent}>

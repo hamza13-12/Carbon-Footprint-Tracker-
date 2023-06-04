@@ -37,16 +37,10 @@ const MainScreens = () => {
   return (
     <View style={styles.container}>
       <StatusBar style="light" backgroundColor="white" />
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Home" options={{ headerShown: false }}>
-          {(props) => <Home {...props} navigation={props.navigation} />}
-        </Stack.Screen>
-      </Stack.Navigator>
+      <BottomNav />
     </View>
   );
 };
-
-
 
 
 const styles = StyleSheet.create({
