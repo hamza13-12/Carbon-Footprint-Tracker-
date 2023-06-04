@@ -88,17 +88,12 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontSize: 20,
-    // fontstyle: 'bold',
     fontWeight: 'bold',
     marginTop: 20,
     marginBottom: 5,
     color: 'white'
   },
   button: {
-    //   backgroundColor: 'rgba(51, 74, 0, 0.51)',
-    //   borderRadius:20,
-    //   height:30,
-    //   width:280,
     color: 'white',
     textAlign: 'center',
     justifyContent: 'center',
@@ -135,7 +130,6 @@ const styles = StyleSheet.create({
     backgroundColor: ' rgba(4, 118, 70, 0.54)',
     opacity: 1,
     justifyContent: 'center',
-    //   alignItems: 'center',
     padding: 16,
     color: 'white'
   },
