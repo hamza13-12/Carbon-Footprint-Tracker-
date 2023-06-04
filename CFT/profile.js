@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     textDecorationColor: 'white',
     textAlign: 'center',
     opacity: 1,
-    marginRight: 50,
+    marginRight: 30,
     marginBottom: 20,
     fontWeight: 'bold'
   },
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     marginLeft: 30
   },
   bullet: {
-    marginBottom: 40
+    marginBottom: 20
   },
 });
 
