@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ImageBackground, Image, Dimensions, TextInput, TouchableOpacity, Keyboard, Button } from 'react-native';
 import Home from './Home';
@@ -20,8 +20,6 @@ export default function App() {
   const dismissKeyboard = () => {
     Keyboard.dismiss();
   };
-
-  
 
   const handleLogin = () => {
     const auth = getAuth();

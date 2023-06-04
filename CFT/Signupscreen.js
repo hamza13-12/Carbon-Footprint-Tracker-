@@ -3,7 +3,7 @@ import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, ImageBackg
 import { useNavigation } from '@react-navigation/native';
 import Login from './Login';;
 import auth from './firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
 const AccountCreationScreen = () => {
   const [name, setname] = useState('');
@@ -22,6 +22,7 @@ const AccountCreationScreen = () => {
   }
 
   const handleCreateAccount = () => {
+    const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
