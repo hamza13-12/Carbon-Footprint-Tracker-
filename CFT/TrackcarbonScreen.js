@@ -15,15 +15,12 @@ const TrackcarbonScreen = () => {
   const dismissKeyboard = () => {
     Keyboard.dismiss();
   };
-
-  const backbutton = () => {
-  };
+  
   return (
     <View style={styles.backgroundImage}>
       <ImageBackground source={require("./assets/bg.png")} style={styles.backgroundImage}>
         <TouchableOpacity style={styles.touchable} onPress={dismissKeyboard} activeOpacity={1}>
-          <TouchableOpacity style={styles.screen} onPress={backbutton}>
-            <Text style={styles.screenname}>Tracker</Text>
+          <TouchableOpacity style={styles.screen} >
           </TouchableOpacity>
           <View style={styles.container}>
             <Text style={styles.heading}>Track Your Carbon Footprint</Text>
@@ -120,19 +117,17 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
   },
-  screenname: {
+  screen: {
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    color: 'white',
     textAlign: 'left',
     marginBottom: 0,
-    marginTop: 150,
+    marginTop: 180,
     fontSize: 15,
     marginLeft: 40,
     color: 'white',
     opacity: 0.75
-  },
-  screen: {
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    color: 'white'
   }
 });
 

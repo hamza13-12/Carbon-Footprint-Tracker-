@@ -9,6 +9,7 @@ import NewsFeed from './NewsFeed';
 import { Image } from 'react-native';
 import DashboardScreen from './Dashboard';
 import TrackcarbonScreen from './TrackcarbonScreen';
+import Profile from './profile';
 
 const Tab = createBottomTabNavigator();
 
@@ -67,14 +68,10 @@ const BottomNav = () => {
         <Tab.Screen name="Home" component={Home} />
         <Tab.Screen name="Dashboard" component={DashboardScreen} />
         <Tab.Screen name="Add data" component={TrackcarbonScreen} />
-        <Tab.Screen name="Profile" component={Screen4} />
+        <Tab.Screen name="Profile" component={Profile} />
       </Tab.Navigator>
     </NavigationContainer>
   );
-};
-
-const Screen4 = () => {
-  return <></>;
 };
 
 export default BottomNav;
