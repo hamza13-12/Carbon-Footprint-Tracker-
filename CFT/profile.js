@@ -39,18 +39,19 @@ const Profile = () => {
   }, []);
 
   const updateinfo = () => {
+
     
   };
   const UpdatedData=()=>{
-    const transportation = TrackcarbonScreen.transportation;
+    const transportation = auth.transportation;
       const reduction = transportationData? ((transportationData - transportation) / transportationData) * 100 : 0;
       const change = reduction >= 0 ? `Increased of ${Math.abs(reduction)}%` : `Decreased of ${Math.abs(reduction)}%`;
       setTransportationData(change);
-      const fooduse=TrackcarbonScreen.food;
+      const fooduse=auth.foodConsumption;
       const reducedfood=foodconsumptionData? ((foodconsumptionData - fooduse) /foodconsumptionData) * 100 : 0;
       const foodchange=reducedfood>=0?`Increased of ${Math.abs(reducedfood)}%` : `Decreased of ${Math.abs(reducedfood)}%`;
       setfoodData(foodchange);
-      const energyuse=TrackcarbonScreen.energyuse;
+      const energyuse=auth.Energyuse;
       const reducedenergy=energyData? ((energyData - energyuse) / energyData) * 100 : 0;
       const energychange=reducedenergy>=0?`Increased of ${Math.abs(reducedenergy)}%` : `Decreased of ${Math.abs(reducedenergy)}%`;
       setenergyData(energychange);
