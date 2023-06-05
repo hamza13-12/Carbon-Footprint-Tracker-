@@ -2,12 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Image } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { auth } from './firebase';
+import TrackcarbonScreen from './TrackcarbonScreen';
 // import { AdMobBanner } from 'react-native-admob';
 
 const Profile = () => {
   const [profileImage, setProfileImage] = useState(null);
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
+  const [transportationData, setTransportationData] = useState('');
+  const [foodconsumptionData, setfoodData] = useState('');
+  const [energyData, setenergyData] = useState('');
 
   useEffect(() => {
     // Retrieve user data from Firebase
@@ -35,6 +39,21 @@ const Profile = () => {
   }, []);
 
   const updateinfo = () => {
+    
+  };
+  const UpdatedData=()=>{
+    const transportation = TrackcarbonScreen.transportation;
+      const reduction = transportationData? ((transportationData - transportation) / transportationData) * 100 : 0;
+      const change = reduction >= 0 ? `Increased of ${Math.abs(reduction)}%` : `Decreased of ${Math.abs(reduction)}%`;
+      setTransportationData(change);
+      const fooduse=TrackcarbonScreen.food;
+      const reducedfood=foodconsumptionData? ((foodconsumptionData - fooduse) /foodconsumptionData) * 100 : 0;
+      const foodchange=reducedfood>=0?`Increased of ${Math.abs(reducedfood)}%` : `Decreased of ${Math.abs(reducedfood)}%`;
+      setfoodData(foodchange);
+      const energyuse=TrackcarbonScreen.energyuse;
+      const reducedenergy=energyData? ((energyData - energyuse) / energyData) * 100 : 0;
+      const energychange=reducedenergy>=0?`Increased of ${Math.abs(reducedenergy)}%` : `Decreased of ${Math.abs(reducedenergy)}%`;
+      setenergyData(energychange);
   };
 
   const pickImage = async () => {
@@ -74,9 +93,9 @@ const Profile = () => {
           <Text style={styles.content2}>Carbon Footprint Progress</Text>
           <Text style={styles.content3}>You have successfully reduced your carbon footprint by 23% since last week!</Text>
           <View style={styles.bullet}>
-            <Text style={styles.content4}>{'\u2B24'} 10% reduction in transportation </Text>
-            <Text style={styles.content4}>{'\u2B24'} 3% reduction in food consumption </Text>
-            <Text style={styles.content4}>{'\u2B24'} 10% reduction in energy use </Text></View>
+            <Text style={styles.content4}>{'\u2B24'} {transportationData} in transportation </Text>
+            <Text style={styles.content4}>{'\u2B24'} {foodconsumptionData} in food consumption </Text>
+            <Text style={styles.content4}>{'\u2B24'} {energyData} in energy use </Text></View>
           <TouchableOpacity style={styles.button} onPress={updateinfo}>
             <Text style={styles.updateinfo}>Update User Information</Text>
           </TouchableOpacity>
