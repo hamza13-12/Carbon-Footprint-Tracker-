@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Image, TextInput, Keyboard, Modal } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { auth } from './firebase';
-import TrackcarbonScreen from './TrackcarbonScreen';
+//import TrackcarbonScreen from './TrackcarbonScreen';
 // import { AdMobBanner } from 'react-native-admob';
 
 const Profile = () => {
@@ -12,6 +12,9 @@ const Profile = () => {
   const [transportationData, setTransportationData] = useState('');
   const [foodconsumptionData, setfoodData] = useState('');
   const [energyData, setenergyData] = useState('');
+  const [changepasswordData, setnewpassData] = useState('');
+
+
 
   useEffect(() => {
     // Retrieve user data from Firebase
@@ -37,26 +40,37 @@ const Profile = () => {
     //       );
     //     };
   }, []);
+  const [Visibility, setvisibility] = useState(false)
 
   const updateinfo = () => {
+    const user = auth.currentUser;
 
-    
+    setvisibility(!Visibility);
+    if (changepasswordData) {
+      user.updatePassword(changepasswordData)
+        .then(() => {
+          setnewpassData('');
+
+        })
+
+    }
+
   };
-  const UpdatedData=()=>{
+  const UpdatedData = () => {
     const transportation = auth.transportation;
-      const reduction = transportationData? ((transportationData - transportation) / transportationData) * 100 : 0;
-      const change = reduction >= 0 ? `Increased of ${Math.abs(reduction)}%` : `Decreased of ${Math.abs(reduction)}%`;
-      setTransportationData(change);
-      const fooduse=auth.foodConsumption;
-      const reducedfood=foodconsumptionData? ((foodconsumptionData - fooduse) /foodconsumptionData) * 100 : 0;
-      const foodchange=reducedfood>=0?`Increased of ${Math.abs(reducedfood)}%` : `Decreased of ${Math.abs(reducedfood)}%`;
-      setfoodData(foodchange);
-      const energyuse=auth.Energyuse;
-      const reducedenergy=energyData? ((energyData - energyuse) / energyData) * 100 : 0;
-      const energychange=reducedenergy>=0?`Increased of ${Math.abs(reducedenergy)}%` : `Decreased of ${Math.abs(reducedenergy)}%`;
-      setenergyData(energychange);
+    const reduction = transportationData ? ((transportationData - transportation) / transportationData) * 100 : 0;
+    const change = reduction >= 0 ? `Increased of ${Math.abs(reduction)}%` : `Decreased of ${Math.abs(reduction)}%`;
+    setTransportationData(change);
+    const fooduse = auth.foodConsumption;
+    const reducedfood = foodconsumptionData ? ((foodconsumptionData - fooduse) / foodconsumptionData) * 100 : 0;
+    const foodchange = reducedfood >= 0 ? `Increased of ${Math.abs(reducedfood)}%` : `Decreased of ${Math.abs(reducedfood)}%`;
+    setfoodData(foodchange);
+    const energyuse = auth.Energyuse;
+    const reducedenergy = energyData ? ((energyData - energyuse) / energyData) * 100 : 0;
+    const energychange = reducedenergy >= 0 ? `Increased of ${Math.abs(reducedenergy)}%` : `Decreased of ${Math.abs(reducedenergy)}%`;
+    setenergyData(energychange);
   };
-
+  //UpdatedData()
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -97,9 +111,41 @@ const Profile = () => {
             <Text style={styles.content4}>{'\u2B24'} {transportationData} in transportation </Text>
             <Text style={styles.content4}>{'\u2B24'} {foodconsumptionData} in food consumption </Text>
             <Text style={styles.content4}>{'\u2B24'} {energyData} in energy use </Text></View>
-          <TouchableOpacity style={styles.button} onPress={updateinfo}>
+          <Modal
+
+            animationType="slide"
+            transparent={true}
+            visible={Visibility}
+            onRequestClose={() => {
+              Alert.alert('Modal has been closed.');
+              setvisibility(!Visibility);
+            }}>
+            <View style={styles.modalcontainer}>
+              <Text style={styles.heading2}>Update your Password</Text>
+              <TextInput
+                style={styles.input}
+                secureTextEntry
+                placeholder=" Enter New Password"
+                placeholderTextColor={' rgba(255, 255, 255, 0.8)'}
+
+
+                value={changepasswordData}
+                onChangeText={setnewpassData}></TextInput>
+
+              <View style={styles.buttons}>
+                <TouchableOpacity style={styles.cancel} onPress={() => updateinfo}>
+                  <Text style={styles.updateinfo}>cancel</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.cancel} onPress={() => setvisibility(!Visibility)}>
+                  <Text style={styles.updateinfo}>done</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
+          <TouchableOpacity style={styles.button} onPress={() => setvisibility(!Visibility)}>
             <Text style={styles.updateinfo}>Update User Information</Text>
           </TouchableOpacity>
+
         </View>
         <View>
           <Image
@@ -237,6 +283,49 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     height: 75,
     width: 350
+  },
+  input: {
+    marginTop: 20,
+    borderRadius: 50,
+    width: '80%',
+    height: 50,
+    marginBottom: 20,
+    backgroundColor: 'rgba(163,241,162,0.6)',
+    borderWidth: 0,
+    marginBottom: 10
+  },
+  modalcontainer: {
+    height: 240,
+    width: 350,
+    marginTop: 160,
+    marginLeft: 10,
+    marginBottom: 100,
+    backgroundColor: 'rgba(4, 118, 70, 1)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 20
+  },
+  cancel: {
+    color: 'white',
+    opacity: 0.7,
+    marginTop: 20
+
+
+  },
+  buttons: {
+    display: 'flex',
+    flexDirection: 'row',
+
+  },
+  heading2: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    marginTop: 0,
+    marginBottom: 20,
+    color: 'white',
+    textAlign: 'center',
+    justifyContent: 'center'
+
   }
 });
 
